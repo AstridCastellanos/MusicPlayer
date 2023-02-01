@@ -1,6 +1,5 @@
-let i=0, repeatState=false, farwardState=false, loopState=false, pista, minutes = 0, secunds = 0, minutesdos = 0, secundsdos = 0, duracion, duraciondos;
-const maximo =  305;
-let songImg, audio;
+let i=0, playState=false, repeatState=false, farwardState=false, loopState=false, pista, minutes = 0, secunds = 0, minutesdos = 0, secundsdos = 0, duracion, duraciondos, songImg, audio;
+const maximo =  300;
 
 const wrapper = document.querySelector('.wrapper');
 const playButton = document.querySelector('.play-button');
@@ -100,19 +99,16 @@ songsList.push({
     songCode:'005'
 });
 
-
-
-
-function renderSong(array){
+//Método para renderizar la imagen de las canciones
+function renderImg(array){
     let u = 0;
     
-    for (song of array){//Product en este caso es el nombre que le vamos a dar a cada elemento de nuestro array.
+    for (song of array){
         
-        //CREACIÓN DE ELEMENTOS HTML
-        const songCard = document.createElement('div');//Creamos un div
+        const songCard = document.createElement('div');
         songCard.classList.add('item');
 
-        songImg = document.createElement('img'); //Creamos una etiqueta img
+        songImg = document.createElement('img'); 
         songImg.setAttribute('code', song.songCode);
         songImg.setAttribute('src', song.image); 
         songImg.addEventListener('click', playSong);
@@ -122,27 +118,23 @@ function renderSong(array){
     }
 }
 
-renderSong(songsList);
-
+//Método para remover el id que tiene estilos para que se haga más grande la imagen de la canción que se está reproduciendo
 function removeId() {
     for(i = 0; i < container.children.length; i++) {
         container.children[i].removeAttribute('id');
     }
 }
 
+//Método para renderizar con la información de la canción seleccionada al presionar en alguna imagen
 function playSong(event){
 
-    icon.classList.remove('fa-pause');
-    icon.classList.add('fa-play');
-    start.innerText = "0:00"; 
     const result = songsList.find(cancion => cancion.songCode === event.target.getAttribute('code'));
     const indexSong = songsList.findIndex(cancion => cancion.songCode === event.target.getAttribute('code'));
 
     render(result, indexSong);
-    //farwardButton.addEventListener('click', () => nextSong(indexSong));
-
 }
 
+//Método para que se reproduzca el audio
 function play() {
 
     if(audio.paused || audio.ended) {
@@ -151,8 +143,8 @@ function play() {
         icon.classList.add('fa-pause');
         
         load = setInterval(avanzar, 1);
-        //durationFunction();
         tmer = setInterval(time, 1000);
+        playState=true;
     }else {
         audio.pause();
         icon.classList.remove('fa-pause');
@@ -160,6 +152,7 @@ function play() {
     }
 }
 
+//Método para que la barra avance con tiempo de reproducción
 function avanzar() {
     if(audio.ended==false){
         var total = parseInt(audio.currentTime*maximo/audio.duration);
@@ -167,6 +160,18 @@ function avanzar() {
     }
 }
 
+//Método para actualizar el progreso de la barra al tocar alguna parte de la misma
+function posicion(position) {
+    
+    var raton = position.pageX-barra.offsetLeft;
+
+    var newTime = raton*audio.duration/300;
+    audio.currentTime = newTime;
+    progress.style.width = (raton) + "px";
+}
+
+
+//Método que, al presionar el botón de reproducción automática de la canción, cambia el color del ícono
 function bucle() {
     if(repeatState==true){
         repeatBucle();
@@ -181,6 +186,7 @@ function bucle() {
     }
 }
 
+//Método que, al presionar el botón de reproducción automática de la lista, cambia el color del ícono
 function repeatBucle(){
     if(loopState==true){
         bucle();
@@ -195,15 +201,7 @@ function repeatBucle(){
     }
 }
 
-function posicion(position) {
-    
-    var raton = position.pageX-barra.offsetLeft;
-
-    var newTime = raton*audio.duration/300;
-    audio.currentTime = newTime;
-    progress.style.width = (raton) + "px";
-}
-
+//Método ,que al presionar en alguna parte de la barra de reproducción, actualiza los números que muestran cuanto tiempo de reproducción lleva la canción.
 function tim(position) {
     if(audio.ended==false){
         var raton = position.pageX-barra.offsetLeft;
@@ -237,7 +235,7 @@ function tim(position) {
         endD.innerHTML = minutes.toString() + ":" + secunds.toString(); 
     }
 }*/
-
+//Método que se mantiene actualizando los números del tiempo de reproducción de la canción, además repite la canción o toda la lista dependiendo de los botones presionados.
 function time() {
     seg = audio.currentTime;
 
@@ -280,6 +278,7 @@ function time() {
     }
 }
 
+//Método que reproduce la canción siguiente
 function nextSong(){
 
     const indexSong = songsList.findIndex(cancion => cancion.songCode === audio.getAttribute('code'));
@@ -297,6 +296,7 @@ function nextSong(){
 
 }
 
+//Método que reproduce la canción anterior
 function previousSong(){
 
     const indexSong = songsList.findIndex(cancion => cancion.songCode === audio.getAttribute('code'));
@@ -311,6 +311,7 @@ function previousSong(){
 
 }
 
+//Método que crea el elemento de audio y agrega la información de la canción que se seleccionó
 function render(result, index){
 
     removeId();
@@ -345,9 +346,13 @@ function render(result, index){
     audio.appendChild(songOgv);
     containerAudio.append(audio);
     containerAudio.replaceChild(audio, vAudio);
-
-    play();
+    
+    if(playState){
+        play();
+    }
 }
 
-
+renderImg(songsList);
 render(songsList[0], 0);
+
+
