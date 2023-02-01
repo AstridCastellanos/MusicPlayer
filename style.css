@@ -1,0 +1,184 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+
+:root {
+    --pink: #E5C0CD;
+    --brown: #885768;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #e6e6e6;
+    font-family: 'Robot', sans-serif;
+}
+
+.inactive {
+    display: none;
+}
+
+.wrapper {
+    display: grid;
+    grid-template-rows: 60px 5px 50% auto 5px minmax(100px, auto);
+    height: 100vh;
+    place-items: center;
+}
+
+.header {
+    display: grid;
+    place-items: center;
+    color: #885768;
+}
+
+.separator {
+    width: 100%;
+    height: 4px;
+    background: #dedede;
+    box-shadow: inset 1px 1px 2px #bdbdbd,
+                inset -1px -1px 2px #ffffff;
+    /*background: #e7c1ce;
+    box-shadow: inset 1px 1px 2px #ceacb7,
+                inset -1px -1px 2px #ffd6e5;*/
+}
+
+.cards {
+    display: block;
+    width: 100%;
+    height: 400px;
+    overflow-x: scroll;
+}
+
+.cards::-webkit-scrollbar {
+    display: none;
+}
+
+.slider-container {
+    display: inline-flex;
+    white-space: nowrap;
+    min-height: 350px;
+    align-items: center;
+    margin: 0 40px;
+    height: 100%;
+}
+
+.cards .item {
+    display: inline-block;
+    margin: 0 15px;
+    width: 220px;
+    height: 220px;
+    border: 5px solid #e6e6e6;
+    transition: all 1.0s ease;
+    border-radius: 30px;
+    background: #e6e6e6;
+    box-shadow:  14px 14px 28px #bebebe,
+             -14px -14px 28px #ffffff;
+    /*background: #E5C0CD;
+    box-shadow:  9px 9px 18px #c5a5b0,
+             -9px -9px 18px #ffdbea;*/
+    overflow: hidden;
+    position: relative;
+}
+
+#main {
+    margin: 0;
+    width: 270px;
+    height: 270px;
+    /*position: absolute;
+    left: 40px;
+    margin-left: 10px;*/
+}
+
+.cards div img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.progrest-bar {
+    display: grid;
+    place-items: center;
+}
+
+.song {
+    font-weight: 500;
+    margin: 10px;
+}
+
+.artist {
+    color: #885768;
+}
+
+.progrest-bar div .barra {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    width: 300px;
+    height: 6px;
+    border-radius: 10px;
+    background: #e6e6e6;
+    box-shadow: inset 1px 1px 2px #bebebe,
+                inset -1px -1px 2px #ffffff;
+    /*background: #e8c9d4;
+    box-shadow: inset 2px 2px 3px #c5abb4,
+                inset -2px -2px 3px #ffe7f4;*/
+}
+
+.barra .progress {
+    height: 5px;
+    width: 0;
+    background-color: var(--brown);
+    border-radius: 10px;
+}
+
+.barra p {
+    color: #885768;
+    margin-top: 5px;
+}
+
+.barra .start {
+    width: 50px;
+    float: left;
+}
+
+.barra .end {
+    float: right;
+}
+
+.audio {
+    visibility: hidden;
+}
+
+/*<i class="fa-solid fa-pause"></i>*/
+
+.footer button {
+    color: var(--brown);
+    font-size: 20px;
+    width: 50px;
+    height: 50px;
+    margin: 0 5px;
+    border: none;
+    /*border-radius: 30px;
+    background: #E5C0CD;
+    box-shadow:  4px 4px 8px #c3a3ae,
+             -4px -4px 8px #ffddec;*/
+    border-radius: 50px;
+    background: #e6e6e6;
+    box-shadow:  5px 5px 10px #bebebe,
+                -5px -5px 10px #ffffff;
+}
+
+.footer button:active {
+    width: 65px;
+    height: 65px;
+    border-radius: 50px;
+}
+
+.footer .backward-button:active{
+    color: white;
+}
+
+.footer .farward-button:active{
+    color: white;
+}

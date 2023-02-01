@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://kit.fontawesome.com/ac748bb1a3.js" crossorigin="anonymous"></script>
+    <title>Music Player</title>
+</head>
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <p>Playing Now</p>
+        </header>
+        <div class="separator"></div>
+        <section class="cards">
+            <div class="slider-container"></div>
+        </section>
+        <section class="progrest-bar">
+            <h2 class="song">CANCIÓN</h2>
+            <p class="artist">ARTISTA</p>
+            <div class="container-audio">
+                <div class="barra">
+                    <div class="progress"></div>
+                    <p class="start">0:00</p>
+                    <p class="end">0:00</p>
+                </div>
+                <audio controls class="audio"></audio>
+            </div>
+        </section>
+        <div class="separator"></div>
+        <footer class="footer">
+            <button class="repeat-button"><i class="fa-solid fa-repeat"></i></button>
+            <button class="backward-button"><i class="fa-solid fa-backward-step"></i></button>
+            <button class="play-button"><i class="fa-solid fa-play"></i></button>
+            <button class="farward-button"><i class="fa-solid fa-forward-step"></i></button>
+            <button class="loop-button"><i class="fa-solid fa-rotate-left"></i></button>
+        </footer>
+    </div>
+    <script src=""></script>
+    <script src="./songs.js"></script>
+</body>
+</html>
